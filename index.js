@@ -25,7 +25,8 @@ function main() {
 
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
         .then(function(stream) {
-            updateDivHtml(lang.clickToAllowMedia)
+            console.log(stream)
+            updateDivHtml(lang.mediaAllowed)
         })
         .catch(function(err) {
             console.log(err)
