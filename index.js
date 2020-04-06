@@ -63,7 +63,7 @@ function getPeerUrl() {
 
         if (localStorage.getItem(PEER_ID_KEY) === id) {
             var url = `${document.location.origin}/?chat=${id}`;
-            updateDivHtml(`${lang.oops}<a href="${url}">${url}</a>`);
+            updateDivHtml(`${lang.urlMessage}<a href="${url}">${url}</a>`);
         } else {
             updateDivHtml(lang.oops);
         }
