@@ -17,7 +17,7 @@ var lang = {
     mediaDenied: `<br />
         (<span class="small"><i>It's possible a different problem occurred that can't be fixed!</i></span>)  
     `,
-    urlMessage: `😍 Send the following link to your friend(s). When you want to chat, everyone visit the link!<br /><br />`
+    urlMessage: `😍 Send the following link to your friend(s).<br />When you want to chat, everyone visit the link!<br /><br />`
 }
 
 function updateDivHtml(value) {
