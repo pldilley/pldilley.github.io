@@ -8,7 +8,7 @@ function main() {
     // });
 
     updateDivHtml(`
-        <span class="flip">⤴</span> Please click  <span>⤴</span>
+        <span class="flip">⤴</span> Please click "Allow" above <span>⤴</span>
     `)
 
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
