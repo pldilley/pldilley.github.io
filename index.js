@@ -1,9 +1,14 @@
+var padLockUrl = `<span class="flip">⤴</span> 🔒 - Click the lock in the url bar above, to allow video and audio!`
+
 var lang = {
-    clickToAllowMedia: `<span class="flip">⤴</span> Please click "Allow" above <span>⤴</span>`,
+    clickToAllowMedia: `
+        <span class="flip">⤴</span> Please click "Allow" above <span>⤴</span><br /><br />
+        <span class="small">(If you don't see anything: ${padLockUrl})</span>
+    `,
     mediaAllowed: `😀 Success! Please wait!`,
     mediaNotAllowed: `
         😕 Oh no! You can receive calls, but can't send video or audio!<br /><br />
-        (<span class="flip">⤴</span> 🔒 - Click the lock in the url bar above, to allow video and audio!)  
+        (${padLockUrl})  
     `
 }
 
