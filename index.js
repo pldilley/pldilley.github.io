@@ -8,7 +8,10 @@ var lang = {
     mediaAllowed: `😀 Success! Please wait!`,
     mediaNotAllowed: `
         😕 Oh no! You can receive calls, but can't send video or audio!<br /><br />
-        (${padLockUrl})  
+        (<span class="small">${padLockUrl}</span>)  
+    `,
+    mediaDenied: `<br />
+        (<span class="small"><i>It's possible a different problem occurred that can't be fixed!</i></span>)  
     `
 }
 
@@ -30,7 +33,13 @@ function main() {
         })
         .catch(function(err) {
             console.log(err)
-            updateDivHtml(lang.mediaNotAllowed)
+            debugger
+            if (err.name === 'NotAllowedError' || err.name === 'SecurityError') {
+                updateDivHtml(lang.mediaNotAllowed)
+            } else {
+                updateDivHtml(lang.mediaNotAllowed + lang.mediaDenied)
+            }
+
         });
 
     // navigator.mediaDevices.getUserMedia({ video: true, audio: true }, (stream) => {
