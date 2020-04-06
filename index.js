@@ -25,9 +25,11 @@ function updateDivHtml(value) {
 }
 
 function main() {
+    var hasUserMediaResponse = false
+
     setTimeout(function() {
-        updateDivHtml(lang.clickToAllowMedia)
-    }, 500)
+        return !hasUserMediaResponse && updateDivHtml(lang.clickToAllowMedia)
+    }, 1000)
 
     if (!window.localStorage) {
         return updateDivHtml(lang.incompatible)
@@ -44,7 +46,10 @@ function main() {
             } else {
                 updateDivHtml(lang.mediaNotAllowed + lang.mediaDenied);
             }
-        });
+        })
+        .finally(function() {
+            hasUserMediaResponse = true
+        })
 
     // navigator.mediaDevices.getUserMedia({ video: true, audio: true }, (stream) => {
     //   const call = peer.call('another-peers-id', stream);
