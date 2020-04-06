@@ -55,7 +55,9 @@ function main() {
 }
 
 function getPeerUrl() {
-    var peer = new Peer(null, { debug: 2 });
+    var peerId = localStorage.getItem(PEER_ID_KEY)
+    console.log('Pre-existing ID', peerId)
+    var peer = new Peer(peerId || null, { debug: 2 });
 
     peer.on('open', function(id) {
         console.log('My peer ID is: ' + id);
