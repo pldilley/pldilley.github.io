@@ -1,4 +1,5 @@
 var PEER_ID_KEY = 'peerId'
+var URL_PARAM_CHAT_KEY = 'chat='
 
 var padLockUrl = `<span class="flip">⤴</span> 🔒 - Click the lock in the url bar above, to allow video and audio!`
 
@@ -24,57 +25,19 @@ function updateDivHtml(value) {
     document.getElementById('ct').innerHTML = value
 }
 
-function main() {
-    var hasUserMediaResponse = false
+function getMediaStream() {
+    let stream = null
 
-    setTimeout(function() {
-        return !hasUserMediaResponse && updateDivHtml(lang.clickToAllowMedia)
-    }, 1000)
-
-    if (!window.localStorage) {
-        return updateDivHtml(lang.incompatible)
-    }
-
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-        .then(function(stream) {
-            updateDivHtml(lang.mediaAllowed)
-            getPeerUrl()
+    return navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(audioStream => (stream = audioStream) && navigator.mediaDevices.getUserMedia({ video: true }))
+        .then(videoStream => videoStream.getTracks().forEach(stream.addTrack))
+        .catch(err => {
+            if (stream) return stream; // If audio is available
+            const userDenied = err.name === 'NotAllowedError' || err.name === 'SecurityError'
+            updateDivHtml(`${lang.mediaNotAllowed}${!userDenied ? lang.mediaDenied : ''}`);
         })
-        .catch(function(err) {
-            if (err.name === 'NotAllowedError' || err.name === 'SecurityError') {
-                updateDivHtml(lang.mediaNotAllowed);
-            } else {
-                updateDivHtml(lang.mediaNotAllowed + lang.mediaDenied);
-            }
+        .finally(() => {
+            if (stream) updateDivHtml(lang.mediaAllowed)
+            return stream
         })
-        .finally(function() {
-            hasUserMediaResponse = true
-        })
-
-    // navigator.mediaDevices.getUserMedia({ video: true, audio: true }, (stream) => {
-    //   const call = peer.call('another-peers-id', stream);
-    //   call.on('stream', (remoteStream) => {
-    //     // Show stream in some <video> element.
-    //   });
-    // }, (err) => {
-    //   console.error('Failed to get local stream', err);
-    // });
-}
-
-function getPeerUrl() {
-    var peerId = localStorage.getItem(PEER_ID_KEY)
-    console.log('Pre-existing ID', peerId)
-    var peer = new Peer(peerId || null, { debug: 2 });
-
-    peer.on('open', function(id) {
-        console.log('My peer ID is: ' + id);
-        localStorage.setItem(PEER_ID_KEY, id);
-
-        if (localStorage.getItem(PEER_ID_KEY) === id) {
-            var url = `${document.location.origin}/?chat=${id}`;
-            updateDivHtml(`${lang.urlMessage}<a href="${url}">${url}</a>`);
-        } else {
-            updateDivHtml(lang.oops);
-        }
-    });
 }
