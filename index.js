@@ -35,6 +35,7 @@ function getMediaStream() {
             if (stream) return stream; // If audio is available
             const userDenied = err.name === 'NotAllowedError' || err.name === 'SecurityError'
             updateDivHtml(`${lang.mediaNotAllowed}${!userDenied ? lang.mediaDenied : ''}`);
+            throw err
         })
         .finally(() => {
             if (stream) updateDivHtml(lang.mediaAllowed)

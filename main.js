@@ -11,6 +11,7 @@ function main() {
 
     getMediaStream()
         .then(getPeerUrl)
+        .catch(console.error)
         .finally(() => hasUserMediaResponse = true)
 }
 
