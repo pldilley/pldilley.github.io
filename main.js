@@ -9,7 +9,7 @@ function main() {
         return updateDivHtml(lang.incompatible)
     }
 
-    getMediaStream()
+    return getMediaStream()
         .then(getPeerUrl)
         .catch(console.error)
         .finally(() => {

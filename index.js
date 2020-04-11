@@ -51,10 +51,25 @@ function getMediaStream() {
             }
 
             if (audioStream && videoStream) {
-                return navigator.mediaDevices.getUserMedia({ audio: true, video: true })
+                return new MediaStream([...audioStream.getTracks(), ...videoStream.getTracks()])
             }
 
             updateDivHtml(lang.mediaAllowed)
             return audioStream || videoStream
         })
+}
+
+// Javascript polyfill for MediaStream
+
+if (typeof window.MediaStream === 'undefined' && typeof webkitMediaStream !== 'undefined') {
+    window.MediaStream = webkitMediaStream;
+}
+
+/*global MediaStream:true */
+if (typeof window.MediaStream !== 'undefined' && !('stop' in window.MediaStream.prototype)) {
+    window.MediaStream.prototype.stop = function() {
+        this.getTracks().forEach(function(track) {
+            track.stop();
+        });
+    };
 }
