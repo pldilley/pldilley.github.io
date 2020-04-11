@@ -1,5 +1,5 @@
 function chat() {
-    const [ organiserId ] = document.location.href.split(URL_PARAM_CHAT_KEY)
+    const [ , organiserId ] = document.location.href.split(URL_PARAM_CHAT_KEY)
     main()
         .then(({ peer, stream }) => {
             updateDivHtml(''); // TODO SOMETHING?
