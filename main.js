@@ -1,5 +1,5 @@
 function main() {
-    var hasUserMediaResponse = false
+    let hasUserMediaResponse = false
 
     setTimeout(() => {
         return !hasUserMediaResponse && updateDivHtml(lang.clickToAllowMedia)
@@ -12,23 +12,30 @@ function main() {
     getMediaStream()
         .then(getPeerUrl)
         .catch(console.error)
-        .finally(() => hasUserMediaResponse = true)
+        .finally(() => {
+            hasUserMediaResponse = true
+        })
 }
 
-function getPeerUrl() {
-    var peerId = localStorage.getItem(PEER_ID_KEY)
-    console.log('Pre-existing ID', peerId)
-    var peer = new Peer(peerId || null, { debug: 2 });
+function getPeerUrl(stream) {
+    return new Promise((resolve, reject) => {
+        const peerId = localStorage.getItem(PEER_ID_KEY)
+        console.log('Pre-existing ID', peerId)
+        const peer = new Peer(peerId || null, { debug: 2 });
 
-    peer.on('open', function(id) {
-        console.log('My peer ID is: ' + id);
-        localStorage.setItem(PEER_ID_KEY, id);
+        peer.on('open', function(id) {
+            console.log('My peer ID is: ' + id);
+            localStorage.setItem(PEER_ID_KEY, id);
 
-        if (localStorage.getItem(PEER_ID_KEY) === id) {
-            var url = `${document.location.origin}/?${URL_PARAM_CHAT_KEY}${id}`;
-            updateDivHtml(`${lang.urlMessage}<a href="${url}">${url}</a>`);
-        } else {
-            updateDivHtml(lang.oops);
-        }
-    });
+            if (localStorage.getItem(PEER_ID_KEY) === id) {
+                const url = `${document.location.origin}/?${URL_PARAM_CHAT_KEY}${id}`;
+                updateDivHtml(`${lang.urlMessage}<a href="${url}">${url}</a>`);
+                resolve({ peer, stream })
+            } else {
+                updateDivHtml(lang.oops);
+                reject(new Error('Could not create peer'))
+            }
+        });
+    })
+
 }

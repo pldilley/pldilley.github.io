@@ -1,9 +1,9 @@
-var PEER_ID_KEY = 'peerId'
-var URL_PARAM_CHAT_KEY = 'chat='
+const PEER_ID_KEY = 'peerId'
+const URL_PARAM_CHAT_KEY = 'chat='
 
-var padLockUrl = `<span class="flip">⤴</span> 🔒 - Click the lock in the url bar above, to allow video and audio!`
+const padLockUrl = `<span class="flip">⤴</span> 🔒 - Click the lock in the url bar above, to allow video and audio!`
 
-var lang = {
+const lang = {
     incompatible: `😔 Sorry this website is not compatible with your browser. `,
     oops: `🤕 Sorry! Something went wrong :(`,
     clickToAllowMedia: `
@@ -25,20 +25,36 @@ function updateDivHtml(value) {
     document.getElementById('ct').innerHTML = value
 }
 
-function getMediaStream() {
-    let stream = null
+function _catch(err) {
+    err.userDenied = err.name === 'NotAllowedError' || err.name === 'SecurityError'
+    return err
+}
 
+function getAudioMediaStream() {
     return navigator.mediaDevices.getUserMedia({ audio: true })
-        .then(audioStream => (stream = audioStream) && navigator.mediaDevices.getUserMedia({ video: true }))
-        .then(videoStream => videoStream.getTracks().forEach(stream.addTrack))
-        .catch(err => {
-            if (stream) return stream; // If audio is available
-            const userDenied = err.name === 'NotAllowedError' || err.name === 'SecurityError'
-            updateDivHtml(`${lang.mediaNotAllowed}${!userDenied ? lang.mediaDenied : ''}`);
-            throw err
-        })
-        .finally(() => {
-            if (stream) updateDivHtml(lang.mediaAllowed)
-            return stream
+        .then(audioStream => ({ audioStream }))
+        .catch(err =>  ({ audioErr: _catch(err) }))
+}
+
+function getVideoMediaStream() {
+    return navigator.mediaDevices.getUserMedia({ video: true })
+        .then(videoStream => ({ videoStream }))
+        .catch(err =>  ({ videoErr: _catch(err) }))
+}
+
+function getMediaStream() {
+    Promise.all([getAudioMediaStream(), getVideoMediaStream()])
+        .then(([{ audioStream, audioErr }, { videoStream, videoErr}]) => {
+            if (audioErr && videoErr) {
+                const userDenied = audioErr.userDenied || videoErr.userDenied
+                return updateDivHtml(`${lang.mediaNotAllowed}${!userDenied ? lang.mediaDenied : ''}`);
+            }
+
+            if (audioStream && videoStream) {
+                audioStream.getTracks().forEach(videoStream.addTrack)
+            }
+
+            updateDivHtml(lang.mediaAllowed)
+            return audioStream || videoStream
         })
 }
