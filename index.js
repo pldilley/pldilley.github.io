@@ -43,7 +43,7 @@ function getVideoMediaStream() {
 }
 
 function getMediaStream() {
-    Promise.all([getAudioMediaStream(), getVideoMediaStream()])
+    return Promise.all([getAudioMediaStream(), getVideoMediaStream()])
         .then(([{ audioStream, audioErr }, { videoStream, videoErr}]) => {
             if (audioErr && videoErr) {
                 const userDenied = audioErr.userDenied || videoErr.userDenied
