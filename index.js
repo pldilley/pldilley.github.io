@@ -59,6 +59,19 @@ function getMediaStream() {
         })
 }
 
+function addStreamToVideo(video, steam) {
+    // Older browsers may not have srcObject
+    if ('srcObject' in video) {
+        video.srcObject = steam;
+    } else {
+        // Avoid using this in new browsers, as it is going away.
+        video.src = window.URL.createObjectURL(steam); // TODO REVOKE URL ONCE DONE
+    }
+    video.onloadedmetadata = function(e) {
+        video.play();
+    };
+}
+
 // Javascript polyfill for MediaStream
 
 if (typeof window.MediaStream === 'undefined' && typeof webkitMediaStream !== 'undefined') {
