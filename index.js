@@ -51,7 +51,7 @@ function getMediaStream() {
             }
 
             if (audioStream && videoStream) {
-                audioStream.getTracks().forEach(videoStream.addTrack)
+                return navigator.mediaDevices.getUserMedia({ audio: true, video: true })
             }
 
             updateDivHtml(lang.mediaAllowed)
