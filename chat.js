@@ -6,7 +6,7 @@ function chat() {
 
             const localVideo = document.getElementById('localVideo');
             addStreamToVideo(localVideo, stream)
-            addStreamToVideo(document.getElementById('remoteVideo'), stream)
+            localVideo.muted = true
 
             peer.on('call', function(call) {
                 call.on('stream', onCall);
