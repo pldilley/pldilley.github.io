@@ -4,27 +4,28 @@ function chat() {
         .then(({ peer, stream }) => {
             updateDivHtml(''); // TODO SOMETHING?
 
-            const localVideo = addNewVideo()
-            addStreamToVideo(localVideo, stream)
-            localVideo.muted = true
+            const localVideo = addNewVideo('LOCAL');
+            addStreamToVideo(localVideo, stream);
+            localVideo.muted = true;
 
             peer.on('call', function(call) {
-                call.on('stream', onCall);
+                debugger
+                call.on('stream', (stream) => onCall(stream, call.peer));
                 call.answer(stream); // Answer the call, providing our mediaStream
             });
 
             if (peer.id !== organiserId) {
                 const call = peer.call(organiserId, stream, {
-                    metadata: { id: peer.id  }
+                    metadata: { name: 'test' }
                 });
-
-                call.on('stream', onCall);
+                debugger
+                call.on('stream', (stream) => onCall(stream, call.peer));
             }
-        })
+        });
 }
-
-function onCall(remoteStream) {
-    const remoteVideo = addNewVideo()
+//.peer
+function onCall(remoteStream, remoteId) {
+    const remoteVideo = addNewVideo(remoteId)
     addStreamToVideo(remoteVideo, remoteStream)
     remoteVideo.addEventListener('ended', (event) => onEndCall(remoteVideo, event))
 }

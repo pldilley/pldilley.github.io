@@ -25,15 +25,21 @@ function updateDivHtml(value) {
     document.getElementById('ct').innerHTML = value
 }
 
-function addNewVideo() {
+function addNewVideo(remoteId) {
     const container = _getContainer()
-    const div = document.createElement('div');
-    const video = document.createElement('video');
-    div.className = 'vd'
-    video.className = 'video'
-    div.appendChild(video)
-    container.appendChild(div)
-    return video
+    const existingVideo = document.getElementById(remoteId);
+    if (!existingVideo) {
+        const div = document.createElement('div');
+        const video = document.createElement('video');
+        video.id = remoteId
+        div.className = 'vd'
+        video.className = 'video'
+        div.appendChild(video)
+        container.appendChild(div)
+        return video
+    } else {
+        return existingVideo
+    }
 }
 
 function _catch(err) {
