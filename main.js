@@ -11,7 +11,10 @@ function main() {
 
     return getMediaStream()
         .then(getPeer)
-        .then(r => updateDivHtml(`${lang.urlMessage}<a href="${r.url}">${r.url}</a>`))
+        .then(r => {
+            updateDivHtml(`${lang.urlMessage}<a href="${r.url}">${r.url}</a>`);
+            r.peer.destroy();
+        })
         .catch(console.error)
         .finally(() => {
             hasUserMediaResponse = true;
@@ -29,7 +32,6 @@ function getPeer(stream) {
             localStorage.setItem(PEER_ID_KEY, id);
             const url = `${document.location.origin}/?${URL_PARAM_CHAT_KEY}${getFullId(id)}`;
             resolve({ peer, stream, url, fullId: getFullId(id) });
-            peer.destroy();
         });
     })
 
