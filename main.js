@@ -14,6 +14,7 @@ function main() {
         .then(r => {
             updateDivHtml(`${lang.urlMessage}<a href="${r.url}">${r.url}</a>`);
             r.peer.destroy();
+            r.stream.stop();
         })
         .catch(console.error)
         .finally(() => {
