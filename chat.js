@@ -17,7 +17,7 @@ function chat() {
              * If a call is received
              */
             peer.on('call', function(call) {
-                debugger
+                console.log('RECEIVED A CALL', call);
                 call.on('stream', (stream) => onCall(stream, call.peer));
                 call.answer(stream); // Answer the call, providing our mediaStream
             });
@@ -29,8 +29,12 @@ function chat() {
                 const call = peer.call(organiserId, stream, {
                     metadata: { name: 'test' }
                 });
-                debugger
+                console.log('MAKE A CALL', call);
                 call.on('stream', (stream) => onCall(stream, call.peer));
+                call.on('error', (err) => {
+                    console.log(err);
+                    debugger;
+                })
             }
         });
 }
