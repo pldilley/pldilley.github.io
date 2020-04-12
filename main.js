@@ -30,11 +30,9 @@ function getPeer(stream) {
 
         peer.on('open', function(id) {
             console.log('My customised peer ID is: ' + getFullId(id));
-            if (!peerId) {
-                localStorage.setItem(PEER_ID_KEY, id);
-            }
-            const url = `${document.location.origin}/?${URL_PARAM_CHAT_KEY}${getFullId(id)}`;
-            resolve({ peer, stream, url, fullId: getFullId(id) });
+            localStorage.setItem(PEER_ID_KEY, peerId || id);
+            const url = `${document.location.origin}/?${URL_PARAM_CHAT_KEY}${getFullId(peerId || id)}`;
+            resolve({ peer, stream, url, id });
         });
     })
 
