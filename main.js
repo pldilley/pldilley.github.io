@@ -1,40 +1,35 @@
 function main() {
-    let hasUserMediaResponse = false
+    let hasUserMediaResponse = false;
 
     setTimeout(() => {
-        return !hasUserMediaResponse && updateDivHtml(lang.clickToAllowMedia)
-    }, 1000)
+        return !hasUserMediaResponse && updateDivHtml(lang.clickToAllowMedia);
+    }, 1000);
 
     if (!window.localStorage) {
-        return updateDivHtml(lang.incompatible)
+        return updateDivHtml(lang.incompatible);
     }
 
     return getMediaStream()
-        .then(getPeerUrl)
+        .then(getPeer)
+        .then(r => updateDivHtml(`${lang.urlMessage}<a href="${r.url}">${r.url}</a>`))
         .catch(console.error)
         .finally(() => {
-            hasUserMediaResponse = true
+            hasUserMediaResponse = true;
         })
 }
 
-function getPeerUrl(stream) {
+function getPeer(stream) {
     return new Promise((resolve, reject) => {
-        const peerId = localStorage.getItem(PEER_ID_KEY)
-        console.log('Pre-existing ID', peerId)
-        const peer = new Peer(peerId || null, { debug: 2 });
+        const peerId = localStorage.getItem(PEER_ID_KEY);
+        console.log('Pre-existing ID', getFullId(peerId));
+        const peer = new Peer(peerId ? getFullId(peerId) : null, { debug: 2 });
 
         peer.on('open', function(id) {
-            console.log('My peer ID is: ' + id);
+            console.log('My customised peer ID is: ' + getFullId(id));
             localStorage.setItem(PEER_ID_KEY, id);
-
-            if (localStorage.getItem(PEER_ID_KEY) === id) {
-                const url = `${document.location.origin}/?${URL_PARAM_CHAT_KEY}${id}`;
-                updateDivHtml(`${lang.urlMessage}<a href="${url}">${url}</a>`);
-                resolve({ peer, stream })
-            } else {
-                updateDivHtml(lang.oops);
-                reject(new Error('Could not create peer'))
-            }
+            const url = `${document.location.origin}/?${URL_PARAM_CHAT_KEY}${getFullId(id)}`;
+            resolve({ peer, stream, url, fullId: getFullId(id) });
+            peer.destroy();
         });
     })
 
