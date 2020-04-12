@@ -10,15 +10,19 @@ function main() {
     }
 
     return getMediaStream()
+        .then(stream => {
+            hasUserMediaResponse = true;
+            return stream
+        })
         .then(getPeer)
         .then(r => {
-            updateDivHtml(`${lang.urlMessage}<a href="${r.url}">${r.url}</a>`);
             r.peer.destroy();
             r.stream.stop();
+            updateDivHtml(`${lang.urlMessage}<a href="${r.url}">${r.url}</a>`);
         })
-        .catch(console.error)
-        .finally(() => {
-            hasUserMediaResponse = true;
+        .catch(err => {
+            console.error(err)
+            throw err
         })
 }
 
