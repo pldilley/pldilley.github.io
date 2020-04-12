@@ -31,10 +31,10 @@ function chat() {
                 });
                 console.log('MAKE A CALL', call);
                 call.on('stream', (stream) => onCall(stream, call.peer));
-                call.on('error', (err) => {
-                    console.log(err);
-                    debugger;
-                })
+                // call.on('error', (err) => {
+                //     console.log(err);
+                //     debugger;
+                // })
             }
         });
 }
@@ -42,11 +42,14 @@ function chat() {
 function onCall(remoteStream, remoteId) {
     const remoteVideo = addNewVideo(remoteId);
     addStreamToVideo(remoteVideo, remoteStream);
-    remoteVideo.addEventListener('ended', (event) => onEndCall(remoteVideo, event));
+    remoteVideo.addEventListener('stalled', (event) => onEndCall(remoteVideo, event, 'stalled'));
+    remoteVideo.addEventListener('suspend', (event) => onEndCall(remoteVideo, event, 'suspend'));
+    remoteVideo.addEventListener('waiting', (event) => onEndCall(remoteVideo, event, 'waiting'));
+    remoteVideo.addEventListener('error', (event) => onEndCall(remoteVideo, event, 'error'));
 }
 
-function onEndCall(remoteVideo, event) {
+function onEndCall(remoteVideo, event, name) {
     const container = _getContainer();
     container.removeChild(remoteVideo.parentNode);
-    console.log('END', event);
+    console.log('END', name, event);
 }
