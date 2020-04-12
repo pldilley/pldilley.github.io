@@ -16,6 +16,59 @@
         font-size: 36px;
       }
 
+      .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+      }
+
+      .vd {
+        width: 20%;
+        height: auto;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      /* 1 cols */
+      .vd:first-child:nth-last-child(1),
+      .vd:first-child:nth-last-child(1) ~ .vd {
+        width: 100%;
+      }
+      /* 2 cols */
+      .vd:first-child:nth-last-child(2), .vd:first-child:nth-last-child(3), .vd:first-child:nth-last-child(4),
+      .vd:first-child:nth-last-child(2) ~ .vd, .vd:first-child:nth-last-child(3) ~ .vd, .vd:first-child:nth-last-child(4) ~ .vd {
+        width: 50%;
+      }
+      /* 3 cols */
+      .vd:first-child:nth-last-child(5), .vd:first-child:nth-last-child(6), .vd:first-child:nth-last-child(7),
+      .vd:first-child:nth-last-child(5) ~ .vd, .vd:first-child:nth-last-child(6) ~ .vd, .vd:first-child:nth-last-child(7) ~ .vd,
+      .vd:first-child:nth-last-child(8), .vd:first-child:nth-last-child(9),
+      .vd:first-child:nth-last-child(8) ~ .vd, .vd:first-child:nth-last-child(9) ~ .vd {
+        width: 33.333333333%;
+      }
+      /* 4 cols */
+      .vd:first-child:nth-last-child(10), .vd:first-child:nth-last-child(11), .vd:first-child:nth-last-child(12),
+      .vd:first-child:nth-last-child(10) ~ .vd, .vd:first-child:nth-last-child(11) ~ .vd, .vd:first-child:nth-last-child(12) ~ .vd,
+      .vd:first-child:nth-last-child(13), .vd:first-child:nth-last-child(14), .vd:first-child:nth-last-child(15),
+      .vd:first-child:nth-last-child(13) ~ .vd, .vd:first-child:nth-last-child(14) ~ .vd, .vd:first-child:nth-last-child(15) ~ .vd,
+      .vd:first-child:nth-last-child(16),
+      .vd:first-child:nth-last-child(16) ~ .vd {
+        width: 25%;
+      }
+      /* 5 cols */
+      .vd:first-child:nth-last-child(17), .vd:first-child:nth-last-child(18), .vd:first-child:nth-last-child(19),
+      .vd:first-child:nth-last-child(17) ~ .vd, .vd:first-child:nth-last-child(18) ~ .vd, .vd:first-child:nth-last-child(19) ~ .vd,
+      .vd:first-child:nth-last-child(20), .vd:first-child:nth-last-child(21), .vd:first-child:nth-last-child(22),
+      .vd:first-child:nth-last-child(20) ~ .vd, .vd:first-child:nth-last-child(21) ~ .vd, .vd:first-child:nth-last-child(22) ~ .vd,
+      .vd:first-child:nth-last-child(23), .vd:first-child:nth-last-child(24), .vd:first-child:nth-last-child(25)
+      .vd:first-child:nth-last-child(23) ~ .vd, .vd:first-child:nth-last-child(24) ~ .vd, .vd:first-child:nth-last-child(25) ~ .vd
+      {
+        width: 20%;
+      }
+
       .flip {
         transform: scaleX(-1);
         display: inline-block;
@@ -27,19 +80,16 @@
 
       .video {
         display: block;
+        width: 100%;
+        min-height: 100px;
+        border: 2px solid grey;
       }
     </style>
   </head>
   <body>
     <div id="ct">🧐 Please wait...</div>
 
-    <video class="video" id="localVideo" width="320" height="240" autoplay>
-      Your browser does not support the video tag!
-    </video>
-
-    <video class="video" id="remoteVideo" width="320" height="240" autoplay>
-      Your browser does not support the video tag!
-    </video>
+    <div id="container" class="container"></div>
 
     <script>
       if (document.location.href.includes(URL_PARAM_CHAT_KEY)) {

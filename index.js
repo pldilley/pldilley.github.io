@@ -25,9 +25,24 @@ function updateDivHtml(value) {
     document.getElementById('ct').innerHTML = value
 }
 
+function addNewVideo() {
+    const container = _getContainer()
+    const div = document.createElement('div');
+    const video = document.createElement('video');
+    div.className = 'vd'
+    video.className = 'video'
+    div.appendChild(video)
+    container.appendChild(div)
+    return video
+}
+
 function _catch(err) {
     err.userDenied = err.name === 'NotAllowedError' || err.name === 'SecurityError'
     return err
+}
+
+function _getContainer() {
+    return document.getElementById('container')
 }
 
 function getAudioMediaStream() {

@@ -4,7 +4,7 @@ function chat() {
         .then(({ peer, stream }) => {
             updateDivHtml(''); // TODO SOMETHING?
 
-            const localVideo = document.getElementById('localVideo');
+            const localVideo = addNewVideo()
             addStreamToVideo(localVideo, stream)
             localVideo.muted = true
 
@@ -14,13 +14,23 @@ function chat() {
             });
 
             if (peer.id !== organiserId) {
-                const call = peer.call(organiserId, stream);
+                const call = peer.call(organiserId, stream, {
+                    metadata: { id: peer.id  }
+                });
+
                 call.on('stream', onCall);
             }
         })
 }
 
 function onCall(remoteStream) {
-    const remoteVideo = document.getElementById('remoteVideo');
+    const remoteVideo = addNewVideo()
     addStreamToVideo(remoteVideo, remoteStream)
+    remoteVideo.addEventListener('ended', (event) => onEndCall(remoteVideo, event))
+}
+
+function onEndCall(remoteVideo, event) {
+    const container = _getContainer()
+    container.removeChild(remoteVideo.parentNode)
+    console.log('END', event);
 }
