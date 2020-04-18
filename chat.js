@@ -12,6 +12,9 @@ function chat() {
             updateDivHtml(''); // TODO SOMETHING?
 
             addStreamToVideo(addNewVideo('LOCAL'), stream, true);
+            addStreamToVideo(addNewVideo('LOCAL2'), stream, true);
+            addStreamToVideo(addNewVideo('LOCAL3'), stream, true);
+            addStreamToVideo(addNewVideo('LOCAL4'), stream, true);
 
             /**
              * If a call is received
