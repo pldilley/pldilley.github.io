@@ -34,13 +34,13 @@ function addNewVideo(remoteId) {
     const container = _getContainer();
     const existingVideo = document.getElementById(remoteId);
     if (!existingVideo) {
-        const div = document.createElement('div');
+        //const div = document.createElement('div');
         const video = document.createElement('video');
         video.id = remoteId;
-        div.className = 'vd';
-        video.className = 'video';
-        div.appendChild(video);
-        container.appendChild(div);
+        video.className = 'vd';
+        // video.className = 'video';
+        // div.appendChild(video);
+        container.appendChild(video);
         return video;
     } else {
         return existingVideo;
