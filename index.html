@@ -25,89 +25,87 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        align-content: center;
       }
 
       /* 6 cols */
       .vd {
-        width: 20%;
-        height: auto;
+        flex: 1 0 21%;
         padding: 20px;
         box-sizing: border-box;
       }
       /* 2 cols */
-      .vd:first-child:nth-last-child(1), .vd:first-child:nth-last-child(2), .vd:first-child:nth-last-child(3),
-      .vd:first-child:nth-last-child(1) ~ .vd, .vd:first-child:nth-last-child(2) ~ .vd, .vd:first-child:nth-last-child(3) ~ .vd,
-      .vd:first-child:nth-last-child(4),
-      .vd:first-child:nth-last-child(4) ~ .vd {
-        width: 50%;
-      }
-      /* 3 cols */
-      .vd:first-child:nth-last-child(5), .vd:first-child:nth-last-child(6), .vd:first-child:nth-last-child(7),
-      .vd:first-child:nth-last-child(5) ~ .vd, .vd:first-child:nth-last-child(6) ~ .vd, .vd:first-child:nth-last-child(7) ~ .vd,
-      .vd:first-child:nth-last-child(8), .vd:first-child:nth-last-child(9),
-      .vd:first-child:nth-last-child(8) ~ .vd, .vd:first-child:nth-last-child(9) ~ .vd {
-        width: 33.333333333%;
-      }
-      /* 4 cols */
-      .vd:first-child:nth-last-child(10), .vd:first-child:nth-last-child(11), .vd:first-child:nth-last-child(12),
-      .vd:first-child:nth-last-child(10) ~ .vd, .vd:first-child:nth-last-child(11) ~ .vd, .vd:first-child:nth-last-child(12) ~ .vd,
-      .vd:first-child:nth-last-child(13), .vd:first-child:nth-last-child(14), .vd:first-child:nth-last-child(15),
-      .vd:first-child:nth-last-child(13) ~ .vd, .vd:first-child:nth-last-child(14) ~ .vd, .vd:first-child:nth-last-child(15) ~ .vd,
-      .vd:first-child:nth-last-child(16),
-      .vd:first-child:nth-last-child(16) ~ .vd {
-        width: 25%;
-      }
-      /* 5 cols */
-      .vd:first-child:nth-last-child(17), .vd:first-child:nth-last-child(18), .vd:first-child:nth-last-child(19),
-      .vd:first-child:nth-last-child(17) ~ .vd, .vd:first-child:nth-last-child(18) ~ .vd, .vd:first-child:nth-last-child(19) ~ .vd,
-      .vd:first-child:nth-last-child(20), .vd:first-child:nth-last-child(21), .vd:first-child:nth-last-child(22),
-      .vd:first-child:nth-last-child(20) ~ .vd, .vd:first-child:nth-last-child(21) ~ .vd, .vd:first-child:nth-last-child(22) ~ .vd,
-      .vd:first-child:nth-last-child(23), .vd:first-child:nth-last-child(24), .vd:first-child:nth-last-child(25)
-      .vd:first-child:nth-last-child(23) ~ .vd, .vd:first-child:nth-last-child(24) ~ .vd, .vd:first-child:nth-last-child(25) ~ .vd {
-        width: 20%;
-      }
+      /*.vd:first-child:nth-last-child(1), .vd:first-child:nth-last-child(2), .vd:first-child:nth-last-child(3),*/
+      /*.vd:first-child:nth-last-child(1) ~ .vd, .vd:first-child:nth-last-child(2) ~ .vd, .vd:first-child:nth-last-child(3) ~ .vd,*/
+      /*.vd:first-child:nth-last-child(4),*/
+      /*.vd:first-child:nth-last-child(4) ~ .vd {*/
+      /*  width: 50%;*/
+      /*}*/
+      /*!* 3 cols *!*/
+      /*.vd:first-child:nth-last-child(5), .vd:first-child:nth-last-child(6), .vd:first-child:nth-last-child(7),*/
+      /*.vd:first-child:nth-last-child(5) ~ .vd, .vd:first-child:nth-last-child(6) ~ .vd, .vd:first-child:nth-last-child(7) ~ .vd,*/
+      /*.vd:first-child:nth-last-child(8), .vd:first-child:nth-last-child(9),*/
+      /*.vd:first-child:nth-last-child(8) ~ .vd, .vd:first-child:nth-last-child(9) ~ .vd {*/
+      /*  width: 33.333333333%;*/
+      /*}*/
+      /*!* 4 cols *!*/
+      /*.vd:first-child:nth-last-child(10), .vd:first-child:nth-last-child(11), .vd:first-child:nth-last-child(12),*/
+      /*.vd:first-child:nth-last-child(10) ~ .vd, .vd:first-child:nth-last-child(11) ~ .vd, .vd:first-child:nth-last-child(12) ~ .vd,*/
+      /*.vd:first-child:nth-last-child(13), .vd:first-child:nth-last-child(14), .vd:first-child:nth-last-child(15),*/
+      /*.vd:first-child:nth-last-child(13) ~ .vd, .vd:first-child:nth-last-child(14) ~ .vd, .vd:first-child:nth-last-child(15) ~ .vd,*/
+      /*.vd:first-child:nth-last-child(16),*/
+      /*.vd:first-child:nth-last-child(16) ~ .vd {*/
+      /*  width: 25%;*/
+      /*}*/
+      /*!* 5 cols *!*/
+      /*.vd:first-child:nth-last-child(17), .vd:first-child:nth-last-child(18), .vd:first-child:nth-last-child(19),*/
+      /*.vd:first-child:nth-last-child(17) ~ .vd, .vd:first-child:nth-last-child(18) ~ .vd, .vd:first-child:nth-last-child(19) ~ .vd,*/
+      /*.vd:first-child:nth-last-child(20), .vd:first-child:nth-last-child(21), .vd:first-child:nth-last-child(22),*/
+      /*.vd:first-child:nth-last-child(20) ~ .vd, .vd:first-child:nth-last-child(21) ~ .vd, .vd:first-child:nth-last-child(22) ~ .vd,*/
+      /*.vd:first-child:nth-last-child(23), .vd:first-child:nth-last-child(24), .vd:first-child:nth-last-child(25)*/
+      /*.vd:first-child:nth-last-child(23) ~ .vd, .vd:first-child:nth-last-child(24) ~ .vd, .vd:first-child:nth-last-child(25) ~ .vd {*/
+      /*  width: 20%;*/
+      /*}*/
 
-      @media only screen and (max-width: 600px) {
-        /* 6 rows */
-        .vd {
-          width: auto !important;
-          height: 20%;
-          padding: 10px;
-        }
-        /* 2 rows */
-        .vd:first-child:nth-last-child(1), .vd:first-child:nth-last-child(2), .vd:first-child:nth-last-child(3),
-        .vd:first-child:nth-last-child(1) ~ .vd, .vd:first-child:nth-last-child(2) ~ .vd, .vd:first-child:nth-last-child(3) ~ .vd,
-        .vd:first-child:nth-last-child(4),
-        .vd:first-child:nth-last-child(4) ~ .vd {
-          height: 50%;
-        }
-        /* 3 rows */
-        .vd:first-child:nth-last-child(5), .vd:first-child:nth-last-child(6), .vd:first-child:nth-last-child(7),
-        .vd:first-child:nth-last-child(5) ~ .vd, .vd:first-child:nth-last-child(6) ~ .vd, .vd:first-child:nth-last-child(7) ~ .vd,
-        .vd:first-child:nth-last-child(8), .vd:first-child:nth-last-child(9),
-        .vd:first-child:nth-last-child(8) ~ .vd, .vd:first-child:nth-last-child(9) ~ .vd {
-          height: 33.333333333%;
-        }
-        /* 4 rows */
-        .vd:first-child:nth-last-child(10), .vd:first-child:nth-last-child(11), .vd:first-child:nth-last-child(12),
-        .vd:first-child:nth-last-child(10) ~ .vd, .vd:first-child:nth-last-child(11) ~ .vd, .vd:first-child:nth-last-child(12) ~ .vd,
-        .vd:first-child:nth-last-child(13), .vd:first-child:nth-last-child(14), .vd:first-child:nth-last-child(15),
-        .vd:first-child:nth-last-child(13) ~ .vd, .vd:first-child:nth-last-child(14) ~ .vd, .vd:first-child:nth-last-child(15) ~ .vd,
-        .vd:first-child:nth-last-child(16),
-        .vd:first-child:nth-last-child(16) ~ .vd {
-          height: 25%;
-        }
-        /* 5 rows */
-        .vd:first-child:nth-last-child(17), .vd:first-child:nth-last-child(18), .vd:first-child:nth-last-child(19),
-        .vd:first-child:nth-last-child(17) ~ .vd, .vd:first-child:nth-last-child(18) ~ .vd, .vd:first-child:nth-last-child(19) ~ .vd,
-        .vd:first-child:nth-last-child(20), .vd:first-child:nth-last-child(21), .vd:first-child:nth-last-child(22),
-        .vd:first-child:nth-last-child(20) ~ .vd, .vd:first-child:nth-last-child(21) ~ .vd, .vd:first-child:nth-last-child(22) ~ .vd,
-        .vd:first-child:nth-last-child(23), .vd:first-child:nth-last-child(24), .vd:first-child:nth-last-child(25)
-        .vd:first-child:nth-last-child(23) ~ .vd, .vd:first-child:nth-last-child(24) ~ .vd, .vd:first-child:nth-last-child(25) ~ .vd {
-          height: 20%;
-        }
-      }
+      /*@media only screen and (max-width: 600px) {*/
+      /*  !* 6 rows *!*/
+      /*  .vd {*/
+      /*    width: auto !important;*/
+      /*    height: 20%;*/
+      /*    padding: 10px;*/
+      /*  }*/
+      /*  !* 2 rows *!*/
+      /*  .vd:first-child:nth-last-child(1), .vd:first-child:nth-last-child(2), .vd:first-child:nth-last-child(3),*/
+      /*  .vd:first-child:nth-last-child(1) ~ .vd, .vd:first-child:nth-last-child(2) ~ .vd, .vd:first-child:nth-last-child(3) ~ .vd,*/
+      /*  .vd:first-child:nth-last-child(4),*/
+      /*  .vd:first-child:nth-last-child(4) ~ .vd {*/
+      /*    height: 50%;*/
+      /*  }*/
+      /*  !* 3 rows *!*/
+      /*  .vd:first-child:nth-last-child(5), .vd:first-child:nth-last-child(6), .vd:first-child:nth-last-child(7),*/
+      /*  .vd:first-child:nth-last-child(5) ~ .vd, .vd:first-child:nth-last-child(6) ~ .vd, .vd:first-child:nth-last-child(7) ~ .vd,*/
+      /*  .vd:first-child:nth-last-child(8), .vd:first-child:nth-last-child(9),*/
+      /*  .vd:first-child:nth-last-child(8) ~ .vd, .vd:first-child:nth-last-child(9) ~ .vd {*/
+      /*    height: 33.333333333%;*/
+      /*  }*/
+      /*  !* 4 rows *!*/
+      /*  .vd:first-child:nth-last-child(10), .vd:first-child:nth-last-child(11), .vd:first-child:nth-last-child(12),*/
+      /*  .vd:first-child:nth-last-child(10) ~ .vd, .vd:first-child:nth-last-child(11) ~ .vd, .vd:first-child:nth-last-child(12) ~ .vd,*/
+      /*  .vd:first-child:nth-last-child(13), .vd:first-child:nth-last-child(14), .vd:first-child:nth-last-child(15),*/
+      /*  .vd:first-child:nth-last-child(13) ~ .vd, .vd:first-child:nth-last-child(14) ~ .vd, .vd:first-child:nth-last-child(15) ~ .vd,*/
+      /*  .vd:first-child:nth-last-child(16),*/
+      /*  .vd:first-child:nth-last-child(16) ~ .vd {*/
+      /*    height: 25%;*/
+      /*  }*/
+      /*  !* 5 rows *!*/
+      /*  .vd:first-child:nth-last-child(17), .vd:first-child:nth-last-child(18), .vd:first-child:nth-last-child(19),*/
+      /*  .vd:first-child:nth-last-child(17) ~ .vd, .vd:first-child:nth-last-child(18) ~ .vd, .vd:first-child:nth-last-child(19) ~ .vd,*/
+      /*  .vd:first-child:nth-last-child(20), .vd:first-child:nth-last-child(21), .vd:first-child:nth-last-child(22),*/
+      /*  .vd:first-child:nth-last-child(20) ~ .vd, .vd:first-child:nth-last-child(21) ~ .vd, .vd:first-child:nth-last-child(22) ~ .vd,*/
+      /*  .vd:first-child:nth-last-child(23), .vd:first-child:nth-last-child(24), .vd:first-child:nth-last-child(25)*/
+      /*  .vd:first-child:nth-last-child(23) ~ .vd, .vd:first-child:nth-last-child(24) ~ .vd, .vd:first-child:nth-last-child(25) ~ .vd {*/
+      /*    height: 20%;*/
+      /*  }*/
+      /*}*/
 
       .flip {
         transform: scaleX(-1);
