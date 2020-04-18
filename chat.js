@@ -42,10 +42,10 @@ function chat() {
 function onCall(remoteStream, remoteId) {
     const remoteVideo = addNewVideo(remoteId);
     addStreamToVideo(remoteVideo, remoteStream);
-    remoteVideo.addEventListener('stalled', (event) => onEndCall(remoteVideo, event, 'stalled'));
-    remoteVideo.addEventListener('suspend', (event) => onEndCall(remoteVideo, event, 'suspend'));
-    remoteVideo.addEventListener('waiting', (event) => onEndCall(remoteVideo, event, 'waiting'));
-    remoteVideo.addEventListener('error', (event) => onEndCall(remoteVideo, event, 'error'));
+    // remoteVideo.addEventListener('stalled', (event) => onEndCall(remoteVideo, event, 'stalled'));
+    // remoteVideo.addEventListener('suspend', (event) => onEndCall(remoteVideo, event, 'suspend'));
+    // remoteVideo.addEventListener('waiting', (event) => onEndCall(remoteVideo, event, 'waiting'));
+    // remoteVideo.addEventListener('error', (event) => onEndCall(remoteVideo, event, 'error'));
 }
 
 function onEndCall(remoteVideo, event, name) {

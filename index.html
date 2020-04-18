@@ -27,44 +27,86 @@
         align-items: center;
       }
 
-      /* 6 cols */
+      /* Default: 5 cols, 5 rows (with overflow beyond 25) */
       .vd {
-        flex: 1 0 21%;
         padding: 20px;
         box-sizing: border-box;
+        max-width: 20%;
+        max-height: 20%;
       }
+
+      /*1 row*/
+      .vd:first-child:nth-last-child(1), .vd:first-child:nth-last-child(1) ~ .vd,
+      .vd:first-child:nth-last-child(2), .vd:first-child:nth-last-child(2) ~ .vd {
+        max-height: 100%;
+      }
+
+      /*2 row*/
+      .vd:first-child:nth-last-child(3), .vd:first-child:nth-last-child(3) ~ .vd,
+      .vd:first-child:nth-last-child(4), .vd:first-child:nth-last-child(4) ~ .vd,
+      .vd:first-child:nth-last-child(5), .vd:first-child:nth-last-child(5) ~ .vd,
+      .vd:first-child:nth-last-child(6), .vd:first-child:nth-last-child(6) ~ .vd
+      {
+        max-height: 50%;
+      }
+
+      /*3 row*/
+      .vd:first-child:nth-last-child(7), .vd:first-child:nth-last-child(7) ~ .vd,
+      .vd:first-child:nth-last-child(8), .vd:first-child:nth-last-child(8) ~ .vd,
+      .vd:first-child:nth-last-child(9), .vd:first-child:nth-last-child(9) ~ .vd,
+      .vd:first-child:nth-last-child(10), .vd:first-child:nth-last-child(10) ~ .vd,
+      .vd:first-child:nth-last-child(10), .vd:first-child:nth-last-child(11) ~ .vd,
+      .vd:first-child:nth-last-child(10), .vd:first-child:nth-last-child(12) ~ .vd
+      {
+        max-height: 33.333333333%;
+      }
+
+      /*4 row*/
+      .vd:first-child:nth-last-child(13), .vd:first-child:nth-last-child(13) ~ .vd,
+      .vd:first-child:nth-last-child(14), .vd:first-child:nth-last-child(14) ~ .vd,
+      .vd:first-child:nth-last-child(15), .vd:first-child:nth-last-child(15) ~ .vd,
+      .vd:first-child:nth-last-child(16), .vd:first-child:nth-last-child(16) ~ .vd,
+      .vd:first-child:nth-last-child(16), .vd:first-child:nth-last-child(17) ~ .vd,
+      .vd:first-child:nth-last-child(16), .vd:first-child:nth-last-child(18) ~ .vd,
+      .vd:first-child:nth-last-child(16), .vd:first-child:nth-last-child(19) ~ .vd,
+      .vd:first-child:nth-last-child(16), .vd:first-child:nth-last-child(20) ~ .vd
+      {
+        max-height: 25%;
+      }
+
+      /* 1 cols */
+      .vd:first-child:nth-last-child(1), .vd:first-child:nth-last-child(1) ~ .vd {
+        max-width: 100%;
+      }
+
       /* 2 cols */
-      /*.vd:first-child:nth-last-child(1), .vd:first-child:nth-last-child(2), .vd:first-child:nth-last-child(3),*/
-      /*.vd:first-child:nth-last-child(1) ~ .vd, .vd:first-child:nth-last-child(2) ~ .vd, .vd:first-child:nth-last-child(3) ~ .vd,*/
-      /*.vd:first-child:nth-last-child(4),*/
-      /*.vd:first-child:nth-last-child(4) ~ .vd {*/
-      /*  width: 50%;*/
-      /*}*/
-      /*!* 3 cols *!*/
-      /*.vd:first-child:nth-last-child(5), .vd:first-child:nth-last-child(6), .vd:first-child:nth-last-child(7),*/
-      /*.vd:first-child:nth-last-child(5) ~ .vd, .vd:first-child:nth-last-child(6) ~ .vd, .vd:first-child:nth-last-child(7) ~ .vd,*/
-      /*.vd:first-child:nth-last-child(8), .vd:first-child:nth-last-child(9),*/
-      /*.vd:first-child:nth-last-child(8) ~ .vd, .vd:first-child:nth-last-child(9) ~ .vd {*/
-      /*  width: 33.333333333%;*/
-      /*}*/
-      /*!* 4 cols *!*/
-      /*.vd:first-child:nth-last-child(10), .vd:first-child:nth-last-child(11), .vd:first-child:nth-last-child(12),*/
-      /*.vd:first-child:nth-last-child(10) ~ .vd, .vd:first-child:nth-last-child(11) ~ .vd, .vd:first-child:nth-last-child(12) ~ .vd,*/
-      /*.vd:first-child:nth-last-child(13), .vd:first-child:nth-last-child(14), .vd:first-child:nth-last-child(15),*/
-      /*.vd:first-child:nth-last-child(13) ~ .vd, .vd:first-child:nth-last-child(14) ~ .vd, .vd:first-child:nth-last-child(15) ~ .vd,*/
-      /*.vd:first-child:nth-last-child(16),*/
-      /*.vd:first-child:nth-last-child(16) ~ .vd {*/
-      /*  width: 25%;*/
-      /*}*/
-      /*!* 5 cols *!*/
-      /*.vd:first-child:nth-last-child(17), .vd:first-child:nth-last-child(18), .vd:first-child:nth-last-child(19),*/
-      /*.vd:first-child:nth-last-child(17) ~ .vd, .vd:first-child:nth-last-child(18) ~ .vd, .vd:first-child:nth-last-child(19) ~ .vd,*/
-      /*.vd:first-child:nth-last-child(20), .vd:first-child:nth-last-child(21), .vd:first-child:nth-last-child(22),*/
-      /*.vd:first-child:nth-last-child(20) ~ .vd, .vd:first-child:nth-last-child(21) ~ .vd, .vd:first-child:nth-last-child(22) ~ .vd,*/
-      /*.vd:first-child:nth-last-child(23), .vd:first-child:nth-last-child(24), .vd:first-child:nth-last-child(25)*/
-      /*.vd:first-child:nth-last-child(23) ~ .vd, .vd:first-child:nth-last-child(24) ~ .vd, .vd:first-child:nth-last-child(25) ~ .vd {*/
-      /*  width: 20%;*/
-      /*}*/
+      .vd:first-child:nth-last-child(3), .vd:first-child:nth-last-child(3) ~ .vd,
+      .vd:first-child:nth-last-child(4), .vd:first-child:nth-last-child(4) ~ .vd
+      {
+        max-width: 50%;
+      }
+
+      /* 3 cols */
+      .vd:first-child:nth-last-child(5), .vd:first-child:nth-last-child(5) ~ .vd,
+      .vd:first-child:nth-last-child(6), .vd:first-child:nth-last-child(6) ~ .vd,
+      .vd:first-child:nth-last-child(7), .vd:first-child:nth-last-child(7) ~ .vd,
+      .vd:first-child:nth-last-child(8), .vd:first-child:nth-last-child(8) ~ .vd,
+      .vd:first-child:nth-last-child(9), .vd:first-child:nth-last-child(9) ~ .vd
+      {
+        max-width: 33.333333333%;
+      }
+
+      /* 4 cols */
+      .vd:first-child:nth-last-child(10), .vd:first-child:nth-last-child(10) ~ .vd,
+      .vd:first-child:nth-last-child(11), .vd:first-child:nth-last-child(11) ~ .vd,
+      .vd:first-child:nth-last-child(12), .vd:first-child:nth-last-child(12) ~ .vd,
+      .vd:first-child:nth-last-child(13), .vd:first-child:nth-last-child(13) ~ .vd,
+      .vd:first-child:nth-last-child(14), .vd:first-child:nth-last-child(14) ~ .vd,
+      .vd:first-child:nth-last-child(15), .vd:first-child:nth-last-child(15) ~ .vd,
+      .vd:first-child:nth-last-child(16), .vd:first-child:nth-last-child(16) ~ .vd
+      {
+        max-width: 25%;
+      }
 
       /*@media only screen and (max-width: 600px) {*/
       /*  !* 6 rows *!*/
