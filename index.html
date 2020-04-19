@@ -50,10 +50,15 @@
         max-height: 16.666666666%;
       }
 
+      .vd:first-child {
+        margin-top: 0.1vh
+      }
+
       /*1 row*/
       .vd:first-child:nth-last-child(1), .vd:first-child:nth-last-child(1) ~ .vd,
       .vd:first-child:nth-last-child(2), .vd:first-child:nth-last-child(2) ~ .vd {
         max-height: 100%;
+        margin-top: 0;
       }
 
       /*2 row*/
@@ -63,6 +68,7 @@
       .vd:first-child:nth-last-child(6), .vd:first-child:nth-last-child(6) ~ .vd
       {
         max-height: 50%;
+        margin-top: 0;
       }
 
       /*3 row*/
@@ -74,6 +80,7 @@
       .vd:first-child:nth-last-child(12), .vd:first-child:nth-last-child(12) ~ .vd
       {
         max-height: 33.333333333%;
+        margin-top: 0;
       }
 
       /*4 row*/
@@ -87,6 +94,7 @@
       .vd:first-child:nth-last-child(20), .vd:first-child:nth-last-child(20) ~ .vd
       {
         max-height: 25%;
+        margin-top: 0;
       }
 
       /*5 row*/
@@ -102,6 +110,7 @@
       .vd:first-child:nth-last-child(30), .vd:first-child:nth-last-child(30) ~ .vd
       {
         max-height: 20%;
+        margin-top: 0;
       }
 
       /* 1 cols */
@@ -210,7 +219,7 @@
     <div id="container" class="container"></div>
 
     <script>
-      console.log('v2');
+      console.log('v3');
       if (document.location.href.includes(URL_PARAM_CHAT_KEY)) {
         chat();
       } else {
