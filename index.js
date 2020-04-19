@@ -37,7 +37,7 @@ function addNewVideo(remoteId, isLocal) {
         //const div = document.createElement('div');
         const video = document.createElement('video');
         video.id = remoteId;
-        video.className = 'vd ' + isLocal ? 'vdself' : '';
+        video.className = 'vd ' + (isLocal ? 'vdself' : '');
         // video.className = 'video';
         // div.appendChild(video);
         container.appendChild(video);
