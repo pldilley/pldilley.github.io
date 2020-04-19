@@ -11,7 +11,7 @@ function chat() {
 
             updateDivHtml(''); // TODO SOMETHING?
 
-            window.makeOne = () => addStreamToVideo(addNewVideo('LOCAL' + Math.random()), stream, true);
+            window.makeOne = () => addStreamToVideo(addNewVideo('LOCAL' + Math.random(), true), stream, true);
             window.makeOne()
             /**
              * If a call is received

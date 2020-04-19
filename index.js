@@ -30,14 +30,14 @@ function updateDivHtml(value) {
     document.getElementById('ct').innerHTML = value
 }
 
-function addNewVideo(remoteId) {
+function addNewVideo(remoteId, isLocal) {
     const container = _getContainer();
     const existingVideo = document.getElementById(remoteId);
     if (!existingVideo) {
         //const div = document.createElement('div');
         const video = document.createElement('video');
         video.id = remoteId;
-        video.className = 'vd';
+        video.className = 'vd ' + isLocal ? 'vdself' : '';
         // video.className = 'video';
         // div.appendChild(video);
         container.appendChild(video);
