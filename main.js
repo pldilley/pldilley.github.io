@@ -39,5 +39,4 @@ function getPeer(stream) {
             resolve({ peer, stream, url, id });
         });
     })
-
 }
