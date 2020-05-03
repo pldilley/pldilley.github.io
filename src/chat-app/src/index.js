@@ -1,4 +1,5 @@
 import "react-app-polyfill/stable";
+import "./helpers/shim";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";

@@ -6,7 +6,7 @@ export function getSavedPeerId() {
 }
 
 export function generateNewPeerId() {
-  const newId = Math.random() + APP_PREFIX_ID;
+  const newId = Math.random().toString().replace("0.", "") + APP_PREFIX_ID;
   localStorage.setItem(PEER_ID_KEY, newId);
   return newId;
 }
