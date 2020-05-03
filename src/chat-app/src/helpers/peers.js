@@ -1,5 +1,5 @@
-import { APP_PREFIX_ID, PEER_ID_KEY } from './constants';
-import Peer from 'peerjs';
+import { APP_PREFIX_ID, PEER_ID_KEY } from "./constants";
+import Peer from "peerjs";
 
 export function getSavedPeerId() {
   return localStorage.getItem(PEER_ID_KEY);
@@ -12,9 +12,9 @@ export function generateNewPeerId() {
 }
 
 export function getOpenPeer(peerId) {
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const peer = new Peer(peerId, { debug: 2 });
-    peer.on('open', () => resolve(peer));
-    peer.on('error', (err) => reject(err));
-  })
+    peer.on("open", () => resolve(peer));
+    peer.on("error", (err) => reject(err));
+  });
 }
