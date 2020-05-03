@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import lang from "./helpers/lang";
-import { ERRORS, URL_PARAM_CHAT_KEY } from "./helpers/constants";
-import * as peers from "./helpers/peers";
-import * as streams from "./helpers/streams";
-import "./App.scss";
+import React, { useState, useEffect } from 'react';
+import lang from './helpers/lang';
+import { ERRORS, URL_PARAM_CHAT_KEY } from './helpers/constants';
+import * as peers from './helpers/peers';
+import * as streams from './helpers/streams';
+import './App.scss';
 
 function App() {
   const [message, setMessage] = useState(lang.pleaseWait);
@@ -37,7 +37,7 @@ async function init(setMessage) {
 
     const stream = await _getStream(() =>
       setMessage(lang.clickToAllowMedia)
-    ).catch((err) => {
+    ).catch(err => {
       if (err.message === ERRORS.USER_DENIED) return null;
       throw err;
     });

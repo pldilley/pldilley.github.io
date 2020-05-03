@@ -1,17 +1,17 @@
-import { ERRORS } from "./constants";
+import { ERRORS } from './constants';
 
 export function getAudioMediaStream() {
   return navigator.mediaDevices
     .getUserMedia({ audio: true })
-    .then((audioStream) => ({ audioStream }))
-    .catch((err) => ({ audioErr: _catch(err) }));
+    .then(audioStream => ({ audioStream }))
+    .catch(err => ({ audioErr: _catch(err) }));
 }
 
 export function getVideoMediaStream() {
   return navigator.mediaDevices
     .getUserMedia({ video: true })
-    .then((videoStream) => ({ videoStream }))
-    .catch((err) => ({ videoErr: _catch(err) }));
+    .then(videoStream => ({ videoStream }))
+    .catch(err => ({ videoErr: _catch(err) }));
 }
 
 export function getMediaStream() {
@@ -37,6 +37,6 @@ export function getMediaStream() {
 
 function _catch(err) {
   err.userDenied =
-    err.name === "NotAllowedError" || err.name === "SecurityError";
+    err.name === 'NotAllowedError' || err.name === 'SecurityError';
   return err;
 }

@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./Video.scss";
+import React from 'react';
+import PropTypes from 'prop-types';
+import './Video.scss';
 
-const VIDEO_CSS = "video";
-const VIDEO_SELF_CSS = "video-self";
+const VIDEO_CSS = 'video';
+const VIDEO_SELF_CSS = 'video-self';
 
 /**
  * Video component
@@ -20,7 +20,7 @@ function Video({ id, isSelf = false, src }) {
     <video
       id={id}
       src={src}
-      className={`${VIDEO_CSS} ${isSelf ? VIDEO_SELF_CSS : ""}`}
+      className={`${VIDEO_CSS} ${isSelf ? VIDEO_SELF_CSS : ''}`}
     />
   );
 }
