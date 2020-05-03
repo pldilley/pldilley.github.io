@@ -32,7 +32,7 @@ export default App;
  */
 async function init(setMessage) {
   try {
-    if (await _hasRequirements()) {
+    if (!_hasRequirements()) {
       setMessage(lang.incompatible)
       return;
     }
