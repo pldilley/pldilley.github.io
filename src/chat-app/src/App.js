@@ -2,40 +2,42 @@ import React, { useState, useEffect } from 'react';
 import lang from './helpers/lang';
 import { ERRORS, URL_PARAM_CHAT_KEY } from './helpers/constants';
 import * as peers from './helpers/peers';
-import * as streams from './helpers/streams';
+import getStream from './helpers/streams';
+import Calls from './Calls/Calls';
 import './App.scss';
 
 function App() {
   const [message, setMessage] = useState(lang.pleaseWait);
+  const [callConfigs, setCallConfigs] = useState(null);
 
   useEffect(() => {
-    init(setMessage);
+    init(setMessage).then(params => params && setCallConfigs(params));
   }, []); // Run once at start
 
   return (
     <div className="App">
       <div className="message" dangerouslySetInnerHTML={{ __html: message }} />
-
-      <div className="container"></div>
+      {callConfigs && (
+        <div className="container">
+          <Calls {...callConfigs} />
+        </div>
+      )}
     </div>
   );
 }
 
 export default App;
 
-/**
- *
- * @param setMessage
- * @returns {Promise<void>}
- */
 async function init(setMessage) {
   try {
+    // Check requirements
     if (!_hasRequirements()) {
       setMessage(lang.incompatible);
       return;
     }
 
-    const stream = await _getStream(() =>
+    // Get stream
+    const stream = await getStream(() =>
       setMessage(lang.clickToAllowMedia)
     ).catch(err => {
       if (err.message === ERRORS.USER_DENIED) return null;
@@ -45,53 +47,38 @@ async function init(setMessage) {
     const mediaStatusStr = stream ? lang.mediaAllowed : lang.mediaNotAllowed;
     setMessage(`${mediaStatusStr}<br /><br />${lang.pleaseWait}`);
 
+    // Get peer
     const peerId = peers.getSavedPeerId() || peers.generateNewPeerId();
     const peer = await peers.getOpenPeer(peerId);
     const chatParam = new URL(document.location.href).searchParams.get(
       URL_PARAM_CHAT_KEY
     );
-    const args = {
-      setMessage,
-      chatParam,
-      mediaStatusStr,
-      peer,
-      peerId,
-      stream,
-    };
 
-    return chatParam ? chat(args) : main(args);
+    // If not chatting, show url and stop peer and stream
+    if (!chatParam) {
+      const url = `${document.location.origin}/?${URL_PARAM_CHAT_KEY}=${peer.id}`;
+      const mediaStatusStr = stream ? lang.mediaAllowed : lang.mediaNotAllowed;
+      peer.destroy();
+      stream.stop();
+      setMessage(
+        `${mediaStatusStr}<br /><br />${lang.urlMessage}<a href="${url}">${url}</a>`
+      );
+    } else {
+      setMessage('');
+    }
+
+    return chatParam ? { chatParam, peer, stream } : null;
   } catch (err) {
     switch (err.message) {
       case ERRORS.STREAM_ERROR:
-        setMessage(lang.mediaDenied);
-        break;
+        return setMessage(lang.mediaDenied);
       default:
-        setMessage(lang.oops);
         console.error(err);
-      // TODO SHOW ERROR
+        return setMessage(lang.oops);
     }
   }
 }
 
-async function main({ setMessage, mediaStatusStr, peer, peerId, stream }) {
-  const url = `${document.location.origin}/?${URL_PARAM_CHAT_KEY}=${peerId}`;
-  debugger;
-  peer.destroy();
-  stream.stop();
-  setMessage(
-    `${mediaStatusStr}<br /><br />${lang.urlMessage}<a href="${url}">${url}</a>`
-  );
-}
-
-async function chat({ peer, peerId, stream, chatParam }) {}
-
 function _hasRequirements() {
   return Boolean(window.localStorage);
-}
-
-async function _getStream(onWaiting) {
-  const timeout = setTimeout(onWaiting, 1000); // Waited 1s? Then we probably need user action
-  const stream = await streams.getMediaStream();
-  clearTimeout(timeout);
-  return stream;
 }

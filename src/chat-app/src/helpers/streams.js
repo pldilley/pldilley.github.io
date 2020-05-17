@@ -1,5 +1,14 @@
 import { ERRORS } from './constants';
 
+export default async function getStream(onWaiting) {
+  const timeout = setTimeout(onWaiting, 1000); // Waited 1s? Then we probably need user action
+  const stream = await getMediaStream();
+  clearTimeout(timeout);
+  return stream;
+}
+
+/* THESE BELOW MAY NOT NEED TO BE EXPORTED */
+
 export function getAudioMediaStream() {
   return navigator.mediaDevices
     .getUserMedia({ audio: true })
@@ -9,7 +18,7 @@ export function getAudioMediaStream() {
 
 export function getVideoMediaStream() {
   return navigator.mediaDevices
-    .getUserMedia({ video: true })
+    .getUserMedia({ video: { facingMode: 'user' } })
     .then(videoStream => ({ videoStream }))
     .catch(err => ({ videoErr: _catch(err) }));
 }
