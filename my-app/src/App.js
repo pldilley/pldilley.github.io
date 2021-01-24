@@ -10,6 +10,7 @@ function App() {
   }
   console.log(f(), f().constructor, f().constructor.name)
   console.log(f`p`, f`p`.constructor, f`p`.constructor.name)
+  console.log('TEST', f`p`.constructor === f)
 
   const test2 = Promise.resolve()
   console.log(test2, test2.constructor, test2.constructor.name)
