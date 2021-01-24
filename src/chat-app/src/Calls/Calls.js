@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { ERRORS } from '../helpers/constants';
 import PropTypes from 'prop-types';
 import Video from '../Video/Video';
 import './Calls.scss';
 
 const SUPPORTS_SRC_OBJ = 'srcObject' in HTMLMediaElement.prototype;
+const MAX_RETIRES = 10; // Every 30 seconds = 5 minutes
 
 /**
  * Video component
@@ -38,12 +40,12 @@ function chat({ chatParam, peer, stream }, setVideoMap) {
     [peer.id]: { ..._getSrcData(stream), isSelf: true },
   });
 
-  window.addNewSelf = () => {
-    setVideoMap(videoMap => ({
-      ...videoMap,
-      [new Date().getTime() + '_']: { ..._getSrcData(stream), isSelf: true },
-    }));
-  };
+  // window.addNewSelf = () => {
+  //   setVideoMap(videoMap => ({
+  //     ...videoMap,
+  //     [new Date().getTime() + '_']: { ..._getSrcData(stream), isSelf: true },
+  //   }));
+  // };
 
   /**
    * If a call is received
@@ -59,15 +61,35 @@ function chat({ chatParam, peer, stream }, setVideoMap) {
    * If not the organiser, make a call!
    */
   if (peer.id !== chatParam) {
-    const call = peer.call(chatParam, stream, { metadata: { name: 'test' } });
-    _addCallStreamListener(chatParam, call, setVideoMap);
-    console.log('MADE A CALL', call);
-
-    // call.on('error', (err) => {
-    //     console.log(err);
-    //     debugger;
-    // })
+    makeCall({ chatParam, peer, stream }, setVideoMap, true);
   }
+
+  let retries = MAX_RETIRES;
+  peer.on('error', err => {
+    if (err.type === ERRORS.PEER_UNAVAILABLE) {
+      console.log('WILL RE-TRY CONNECT TO HOST');
+      setTimeout(() => {
+        retries--;
+        if (retries > 0) {
+          console.log('RE-TRY CONNECT TO HOST', retries);
+          makeCall({ chatParam, peer, stream }, setVideoMap);
+        } else {
+          const isRefresh = window.confirm(
+            'Something went wrong, do you want to try again?'
+          );
+          if (isRefresh) {
+            window.location.reload();
+          }
+        }
+      }, 30000);
+    }
+  });
+}
+
+function makeCall({ chatParam, peer, stream }, setVideoMap, isHostWaiting) {
+  const call = peer.call(chatParam, stream, { metadata: { name: 'test' } });
+  _addCallStreamListener(chatParam, call, setVideoMap, isHostWaiting);
+  console.log('MADE A CALL', call);
 }
 
 function _getSrcData(stream) {
@@ -76,13 +98,13 @@ function _getSrcData(stream) {
     : { src: window.URL.createObjectURL(stream) };
 }
 
-function _addCallStreamListener(id, call, setVideoMap) {
-  setVideoMap(videoMap => ({ ...videoMap, [id]: {} }));
+function _addCallStreamListener(id, call, setVideoMap, isHostWaiting) {
+  setVideoMap(videoMap => ({ ...videoMap, [id]: { isHostWaiting } }));
 
   call.on('stream', stream => {
     setVideoMap(videoMap => ({
       ...videoMap,
-      [id]: { ..._getSrcData(stream), isSelf: true },
+      [id]: { ..._getSrcData(stream), isSelf: false, isHostWaiting: false },
     }));
   });
 }

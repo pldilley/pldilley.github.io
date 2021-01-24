@@ -29,6 +29,7 @@ function Video({ id, isSelf = false, src, srcObject }) {
       ref={videoEl}
       src={src}
       className={`${VIDEO_CSS} ${isSelf ? VIDEO_SELF_CSS : ''}`}
+      muted={isSelf}
       autoPlay
     />
   );
