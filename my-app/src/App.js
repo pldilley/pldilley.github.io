@@ -2,11 +2,15 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const test2 = async function(state) {
-    return state.myTest
+  const test2 = Promise.resolve()
+
+  console.log(test2, test2.constructor, test2.constructor.name)
+
+  async function a() {
+
   }
 
-  console.log(test2.toString())
+  console.log(a, a().constructor, a().constructor.name)
 
   return (
     <div className="App">
