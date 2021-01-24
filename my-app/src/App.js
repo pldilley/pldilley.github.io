@@ -2,15 +2,32 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const test2 = Promise.resolve()
 
+  const f = function() {
+    const r = () => {}
+    r.constructor = f
+    return r
+  }
+  console.log(f(), f().constructor, f().constructor.name)
+  console.log(f`p`, f`p`.constructor, f`p`.constructor.name)
+
+  const test2 = Promise.resolve()
   console.log(test2, test2.constructor, test2.constructor.name)
 
-  async function a() {
-
-  }
-
+  async function a() {}
   console.log(a, a().constructor, a().constructor.name)
+
+  const z = state => true
+  console.log(z, z().constructor, z().constructor.name)
+
+  const x = {}
+  console.log(x, x.constructor, x.constructor.name)
+
+  const y = []
+  console.log(y, y.constructor, y.constructor.name)
+
+  const e = []
+  console.log(e, e.constructor, e.constructor.name)
 
   return (
     <div className="App">
