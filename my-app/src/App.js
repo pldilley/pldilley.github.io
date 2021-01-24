@@ -2,11 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  function test(state) {
-    return state * 5 * 5;
+  const test2 = async function(state) {
+    return state.myTest
   }
 
-  console.log(test.toString())
+  console.log(test2.toString())
 
   return (
     <div className="App">
